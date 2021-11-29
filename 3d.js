@@ -98,28 +98,60 @@ setButton.addEventListener("click", () => {
 
 let direction =(event) => {
     if (event.keyCode === 87) {
-        camera.x += 1;
+        camera.x += 0.25;
         if (interval === null) {
             t -= delta;
             update();
         }
     }
     if (event.keyCode === 68) {
-        camera.y += 1;
+        camera.y += 0.25;
         if (interval === null) {
             t -= delta;
             update();
         }
     }
     if (event.keyCode === 83) {
-        camera.x -= 1;
+        camera.x -= 0.25;
         if (interval === null) {
             t -= delta;
             update();
         }
     }
     if (event.keyCode === 65) {
-        camera.y -= 1;
+        camera.y -= 0.25;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
+    }
+    if (event.keyCode === 38) {
+        light.x += 0.25;
+        light = norm3(light);
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
+    }
+    if (event.keyCode === 39) {
+        light.y += 0.25;
+        light = norm3(light);
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
+    }
+    if (event.keyCode === 40) {
+        light.x -= 0.25;
+        light = norm3(light);
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
+    }
+    if (event.keyCode === 37) {
+        light.y -= 0.25;
+        light = norm3(light);
         if (interval === null) {
             t -= delta;
             update();
@@ -170,18 +202,16 @@ let castRay = (ro, rd) => {
     ro.x = add3(ro, mulS3(rd, (minDist.x - 0.001))).x;
     ro.y = add3(ro, mulS3(rd, (minDist.x - 0.001))).y;
     ro.z = add3(ro, mulS3(rd, (minDist.x - 0.001))).z;
-    rd = n;
     return mulS3(col, diffuse);
 }
 
 let traceRay = (ro, rd) => {
     let col = castRay(ro, rd);
-    if (col.x == 0) {return col}
-    if (castRay(ro, light).x != 0) {
-
+    if (col.x === 0) {return col}
+    if (castRay(ro, light).x !== 0) {
         col = mulS3(col, 0.5);
-
     }
+
     return col;
 }
 
