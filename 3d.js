@@ -57,6 +57,7 @@ let camera = vec3(-12, 0, -5);
 let light = norm3(vec3(-0.5, 0.75, -1));
 let electronsAmount = 3;
 let t = 0;
+let delta = 0.1;
 
 
 let cnv = document.getElementById('cnv');
@@ -98,15 +99,31 @@ setButton.addEventListener("click", () => {
 let direction =(event) => {
     if (event.keyCode === 87) {
         camera.x += 1;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
     }
     if (event.keyCode === 68) {
-        camera.y += 1
+        camera.y += 1;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
     }
     if (event.keyCode === 83) {
-        camera.x -= 1
+        camera.x -= 1;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
     }
     if (event.keyCode === 65) {
-        camera.y -= 1
+        camera.y -= 1;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
     }
 }
 
@@ -169,7 +186,7 @@ let traceRay = (ro, rd) => {
 }
 
 function update() {
-    t += 0.1;
+    t += delta;
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, w, h);
     for (let i = 0; i < w / decrease; i++) {
