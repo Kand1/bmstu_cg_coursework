@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-columns: 160px 120px 100px 120px 60px;
+    margin: 0 auto;
+    width: 50vw;
+}
+
+.botEl {
+    height: 80px;
+    width: 120px;
+    font-size: 1.3em;
+    margin: 20px;
+}
+
+.oneLineInput {
+    height: 40px;
+    width: 60px;
+    margin-right: 0;
+}
+
+#cnv {
+    display: block;
+    margin: 0 auto;
+}
