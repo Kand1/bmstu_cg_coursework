@@ -52,6 +52,11 @@ let findSpherePos = (number) => {
 }
 //-----------------------------------------------------
 
+const MAX_DIST = 99999;
+let camera = vec3(-12, 0, -5);
+let light = norm3(vec3(-0.5, 0.75, -1));
+let electronsAmount = 3;
+let t = 0;
 
 
 let cnv = document.getElementById('cnv');
@@ -88,6 +93,24 @@ setButton.addEventListener("click", () => {
         update();
     }
 })
+
+
+let direction =(event) => {
+    if (event.keyCode === 87) {
+        camera.x += 1;
+    }
+    if (event.keyCode === 68) {
+        camera.y += 1
+    }
+    if (event.keyCode === 83) {
+        camera.x -= 1
+    }
+    if (event.keyCode === 65) {
+        camera.y -= 1
+    }
+}
+
+document.addEventListener("keydown", direction);
 
 let castRay = (ro, rd) => {
     let col;
@@ -171,11 +194,7 @@ function update() {
 
 
 
-const MAX_DIST = 99999;
-let camera = vec3(-12, 0, -5);
-let light = norm3(vec3(-0.5, 0.75, -1));
-let electronsAmount = 3;
-let t = 0;
+
 update();
 
 
