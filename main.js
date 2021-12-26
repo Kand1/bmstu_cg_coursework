@@ -58,7 +58,8 @@ let light = norm3(vec3(-0.5, 0.75, -1));
 let electronsAmount = 3;
 let t = 0;
 let delta = 0.1;
-
+let frameCounter = 0;
+let frameTimeSum = 0;
 
 let cnv = document.getElementById('cnv');
 let ctx = cnv.getContext('2d');
@@ -82,6 +83,8 @@ let scaleInput = document.getElementById('scale_input');
 scaleButton.addEventListener("click", () => {
     if (scaleInput.value && scaleInput.value > 0) {
         decrease = scaleInput.value;
+        frameCounter = 0;
+        frameTimeSum = 0;
         update();
     }
 })
@@ -94,6 +97,8 @@ setButton.addEventListener("click", () => {
         update();
     }
 })
+
+let frameTime = document.getElementById('avg');
 
 
 let direction =(event) => {
@@ -217,8 +222,8 @@ let traceRay = (ro, rd) => {
 
 function update() {
     t += delta;
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, w, h);
+    const start= new Date().getTime();
+
     for (let i = 0; i < w / decrease; i++) {
         for (let j = 0; j < h / decrease; j++) {
             let y = i / w * decrease * 2 - 1;
@@ -235,6 +240,10 @@ function update() {
             ctx.fillRect(i * decrease, j * decrease, decrease, decrease);
         }
     }
+    const end = new Date().getTime();
+    frameCounter++;
+    frameTimeSum += end - start;
+    frameTime.innerHTML = `${frameTimeSum / frameCounter}`;
 
 
 }

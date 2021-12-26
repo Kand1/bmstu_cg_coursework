@@ -11,17 +11,19 @@
 		</style>
     </head>
     <body>
-        <canvas width="1200" height="1200" id='cnv'>Обновите браузер</canvas>
+        <canvas width="800" height="800" id='cnv'>Обновите браузер</canvas>
         <div class="container">
             <button id="start_button" class="botEl">start / stop</button>
             <button id="scale_button" class="botEl">scale pixels</button>
             <input value="7"  id="scale_input" class="botEl oneLineInput">
             <button id="set_button" class="botEl">set electrons</button>
             <input value="3"  id="set_input" class="botEl oneLineInput">
+            <div>Average frame time:</div>
+            <div id ="avg"></div>
 
 
         </div>
-        <script src="3d.js" type="text/javascript" encoding="UTF-8"></script>
-        <link rel="stylesheet" href="main.css">
+        <script src="main.js" type="text/javascript" encoding="UTF-8"></script>
+        <link rel="stylesheet" href="index.css">
     </body>
 </html>
