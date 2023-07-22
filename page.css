@@ -9,19 +9,6 @@ button, input {
     margin: 20px calc(50vw - 400px);
 }
 
-/* .botEl {
-    height: 80px;
-    width: 120px;
-    font-size: 1.3em;
-    margin: 20px;
-}
-
-.oneLineInput {
-    height: 40px;
-    width: 60px;
-    margin-right: 0;
-} */
-
 #cnv {
     display: block;
     margin: 0 auto;
