@@ -14,14 +14,28 @@
         <canvas width="800" height="800" id='cnv'>Обновите браузер</canvas>
         <div class="container">
             <button id="start_button" class="botEl">start / stop</button>
-            <button id="scale_button" class="botEl">scale pixels</button>
-            <input value="7"  id="scale_input" class="botEl oneLineInput">
-            <button id="set_button" class="botEl">set electrons</button>
-            <input value="3"  id="set_input" class="botEl oneLineInput">
-            <div>Average frame time:</div>
+            <div>
+                <button id="scale_button" class="botEl">scale pixels</button>
+                <input value="7"  id="scale_input" class="botEl oneLineInput">
+            </div>
+            <div>
+                <button id="set_button" class="botEl">set electrons</button>
+                <input value="3"  id="set_input" class="botEl oneLineInput">
+            </div>
+            <div>Average fps:</div>
             <div id ="avg"></div>
-
-
+        </div>
+        <div class="container">
+            R:
+            <input value="1"  id="r">
+            G:
+            <input value="0.2"  id="g">
+            B:
+            <input value="0.1"  id="b">
+        </div>
+        <div class="container">
+            <button id="magic">turn on/off magic</button>
+            WASD - to move camera, QE - to rotate, ←↑↓→ - to move light
         </div>
         <script src="main.js" type="text/javascript" encoding="UTF-8"></script>
         <link rel="stylesheet" href="index.css">

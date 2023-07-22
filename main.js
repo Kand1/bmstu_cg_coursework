@@ -65,21 +65,17 @@ let cnv = document.getElementById('cnv');
 let ctx = cnv.getContext('2d');
 let w = cnv.width;
 let h = cnv.height;
-let decrease = 7;
-let interval = null;
+let isRunning = false
 
 let startButton = document.getElementById('start_button');
 startButton.addEventListener("click", () => {
-    if (interval === null) {
-        interval = setInterval(update, 34);
-    } else {
-        clearInterval(interval);
-        interval = null;
-    }
+    isRunning = !isRunning
+    update()
 })
 
 let scaleButton = document.getElementById('scale_button');
 let scaleInput = document.getElementById('scale_input');
+let decrease = scaleInput.value;
 scaleButton.addEventListener("click", () => {
     if (scaleInput.value && scaleInput.value > 0) {
         decrease = scaleInput.value;
@@ -98,7 +94,18 @@ setButton.addEventListener("click", () => {
     }
 })
 
+let magic = document.getElementById('magic');
+let isMagic = false
+magic.addEventListener("click", () => {
+    isMagic = !isMagic;
+    update();
+})
+
 let frameTime = document.getElementById('avg');
+let colorR = document.getElementById('r');
+let colorG = document.getElementById('g');
+let colorB = document.getElementById('b');
+
 
 
 let direction =(event) => {
@@ -125,6 +132,18 @@ let direction =(event) => {
     }
     if (event.keyCode === 65) {
         camera.y -= 0.25;
+        if (interval === null) {
+            t -= delta;
+            update();
+        }
+    }
+    if (event.keyCode === 81 || event.keyCode === 69) {
+        const multiplier = event.keyCode === 81 ? -1 : 1
+        const degree = multiplier * 3.14/32
+        const x = camera.x
+        const y = camera.y
+        camera.x = x*Math.cos(degree) + y*Math.sin(degree)
+        camera.y = y*Math.cos(degree) - x*Math.sin(degree)
         if (interval === null) {
             t -= delta;
             update();
@@ -185,7 +204,7 @@ let castRay = (ro, rd) => {
         if (dist.x > 0 && dist.x < minDist.x) {
             minDist = dist;
             n = sub3(add3(ro, mulS3(rd, dist.x)), spherePos[i]);
-            col = vec3(1, 0.2, 0.1);
+            col = vec3(Number(colorR.value) || 0, Number(colorG.value) || 0, Number(colorB.value) || 0);
         }
     }
 
@@ -242,10 +261,26 @@ function update() {
     }
     const end = new Date().getTime();
     frameCounter++;
-    frameTimeSum += end - start;
-    frameTime.innerHTML = `${frameTimeSum / frameCounter}`;
+    frameTimeSum = end - start;
+    frameTime.innerHTML = `${Math.round(1000 / frameTimeSum)}`;
 
+    if (isMagic) {
+        const colorDelta = 0.1
+        const random = Math.random()
+        const color = random < 0.33 ? colorR : (random > 0.33 && random < 0.66) ? colorG : colorB
+        if (color.value >= 1 || color.value <= 0) {
+            color.value = (Number(color.value) + (color.value >= 1 ? -1 : 1) * colorDelta).toFixed(2)
+        } else {
+            color.value = (Number(color.value) + (Math.random() >= 0.5 ? -1 : 1) * colorDelta).toFixed(2)
+        }
+        if (color.value <= 0) {
+            color.value = colorDelta
+        }
+    }
 
+    if (isRunning) {
+        setTimeout(update, 0)
+    }
 }
 
 
